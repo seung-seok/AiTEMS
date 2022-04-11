@@ -21,10 +21,17 @@ $s3Client = new S3Client([
 ]);
 
 // Use multipart upload
-$source   = 'C:\interaction.csv'; // 업로드할 파일 경로
+
+// 업로드할 파일 경로
+$source   = 'C:\interaction.csv'; 
+
+
 $uploader = new MultipartUploader($s3Client, $source, [
-    'bucket' => 'aitems-4232530859020', // 해당 버킷
-    'key'    => 'interaction.csv',          // 버킷에 저장될 이름 + 확장자
+    // 해당 버킷
+    'bucket' => 'aitems-4232530859020', 
+    
+    // 버킷에 저장될 이름 + 확장자
+    'key'    => 'interaction.csv',          
 ]);
 
 try {

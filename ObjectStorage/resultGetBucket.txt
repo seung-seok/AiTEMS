@@ -1,0 +1,65 @@
+object(Aws\Result)#121 (2) {
+  ["data":"Aws\Result":private]=>
+  array(3) {
+    ["Buckets"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        ["Name"]=>
+        string(20) "aitems-4232530859020"
+        ["CreationDate"]=>
+        object(Aws\Api\DateTimeResult)#164 (3) {
+          ["date"]=>
+          string(26) "2021-12-01 07:43:56.575000"
+          ["timezone_type"]=>
+          int(2)
+          ["timezone"]=>
+          string(1) "Z"
+        }
+      }
+    }
+    ["Owner"]=>
+    array(2) {
+      ["DisplayName"]=>
+      string(13) "ncp-2530859-0"
+      ["ID"]=>
+      string(13) "ncp-2530859-0"
+    }
+    ["@metadata"]=>
+    array(4) {
+      ["statusCode"]=>
+      int(200)
+      ["effectiveUri"]=>
+      string(36) "https://kr.object.ncloudstorage.com/"
+      ["headers"]=>
+      array(7) {
+        ["date"]=>
+        string(29) "Mon, 11 Apr 2022 04:51:38 GMT"
+        ["x-clv-request-id"]=>
+        string(36) "ed80c95a-c2c1-4059-8c09-956120063983"
+        ["x-clv-s3-version"]=>
+        string(3) "2.5"
+        ["accept-ranges"]=>
+        string(5) "bytes"
+        ["x-amz-request-id"]=>
+        string(36) "ed80c95a-c2c1-4059-8c09-956120063983"
+        ["content-type"]=>
+        string(15) "application/xml"
+        ["content-length"]=>
+        string(3) "351"
+      }
+      ["transferStats"]=>
+      array(1) {
+        ["http"]=>
+        array(1) {
+          [0]=>
+          array(0) {
+          }
+        }
+      }
+    }
+  }
+  ["monitoringEvents":"Aws\Result":private]=>
+  array(0) {
+  }
+}

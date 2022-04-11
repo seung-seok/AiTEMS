@@ -10,7 +10,7 @@ use League\Flysystem\Filesystem;
 $accessKey = '3C92F2C564C1A2F36B1D';
 $secretKey = 'C4412634FFA35270969F040D4F7C1CAA7E5D08E4';
 
-// s3 생성
+// S3 생성
 $s3Client = new S3Client([
     'credentials' => [
     'key' => $accessKey,
@@ -21,7 +21,9 @@ $s3Client = new S3Client([
     'version' => '2006-03-01',
 ]);
 
+// Listing all S3 Bucket
 $buckets = $s3Client->listBuckets();
 foreach ($buckets['Buckets'] as $bucket) {
     echo $bucket['Name'] . "\n";
+    var_dump($bucket['Name']);
 }

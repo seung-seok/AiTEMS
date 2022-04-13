@@ -3,9 +3,9 @@
 // 10.학습 결과 테스트 : 학습 결과를 테스트합니다.
 
 // Setting URL
-$serviceId = 'kzblozze40q'; // Version2
-$type      = 'personalRecommend';
-$targetId  = '1';
+$serviceId = '4neju9vtfk6'; // Version2
+$type      = 'personalRecommend'; //personalRecommend, relatedItem, pop 중에 선택
+$targetId  = 'sns@363317';
 $url       = "https://aitems.apigw.ntruss.com/api/v1/services/{$serviceId}/infers/lookup?type={$type}&targetId={$targetId}";
 $uri       = "/api/v1/services/{$serviceId}/infers/lookup?type={$type}&targetId={$targetId}";
 

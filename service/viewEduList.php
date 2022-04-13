@@ -3,7 +3,7 @@
 // 8.학습 목록 조회 : 전체 학습 요청 목록을 조회합니다.
 
 // Setting URL
-$serviceId = 'kzblozze40q'; // Version2
+$serviceId = '4neju9vtfk6'; // Version2
 $isRecent  = false;
 $url       = "https://aitems.apigw.ntruss.com/api/v1/services/{$serviceId}/trains?isRecent={$isRecent}";
 $uri       = "/api/v1/services/{$serviceId}/trains?isRecent={$isRecent}";

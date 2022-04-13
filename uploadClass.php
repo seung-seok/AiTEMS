@@ -21,7 +21,7 @@ class model_objectStorage
     protected $upload_Path;
     protected $bucket;
     protected $key;
-    protected $api_host = 'https://kr.object.ncloudstorage.com';
+    protected $endpoint = 'https://kr.object.ncloudstorage.com';
     protected $ncp_accesskey = '3C92F2C564C1A2F36B1D';
     protected $ncp_secretkey = 'C4412634FFA35270969F040D4F7C1CAA7E5D08E4';
     

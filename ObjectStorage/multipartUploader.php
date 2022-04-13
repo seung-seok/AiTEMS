@@ -1,4 +1,4 @@
-<?
+<?php
 include __DIR__ . '/vendor/autoload.php';
 
 use Aws\S3\S3Client;
@@ -22,21 +22,23 @@ $s3Client = new S3Client([
 
 // Use multipart upload
 
-// 업로드할 파일 경로
-$source   = 'C:\interaction.csv'; 
-
+// 업로드할 파일 경로 및 파일명
+$source   = 'C:\biginteraction.csv'; 
 
 $uploader = new MultipartUploader($s3Client, $source, [
     // 해당 버킷
     'bucket' => 'aitems-4232530859020', 
     
     // 버킷에 저장될 이름 + 확장자
-    'key'    => 'interaction.csv',          
+    'key'    => 'biginteraction.csv',          
 ]);
 
-try {
+try 
+{
     $result = $uploader->upload();
     echo "Upload complete: {$result['ObjectURL']}\n";
-} catch (MultipartUploadException $e) {
+} 
+catch (MultipartUploadException $e) 
+{
     echo $e->getMessage() . "\n";
 }

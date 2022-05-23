@@ -64,7 +64,7 @@ try
         $i = 1;
         foreach($data as $v)
         {
-            $date    = array('date' => date('Y-m-d'));
+            $date    = array('date' => date('Y-m-d H:i:s'));
             $data    = array_merge($v, $date);
             $datas[] = $data;
             if($i == 10)

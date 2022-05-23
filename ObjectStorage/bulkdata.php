@@ -67,7 +67,7 @@ try
             $date    = array('date' => date('Y-m-d H:i:s'));
             $data    = array_merge($v, $date);
             $datas[] = $data;
-            if($i == 10)
+            if($i == 5)
             {
                 break;
             }

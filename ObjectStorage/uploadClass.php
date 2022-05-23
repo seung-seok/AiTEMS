@@ -1,4 +1,18 @@
 <?php
+/*-------------------------------------------
+Title	: 네이버클라우드 Object Storage API 호출 클래스
+Author	: Lee SeungSeok
+Date	: 2022-04-15
+Path	: /home/curation/aitems/library/uploadClass.php
+Comment	:
+    Object Storage에 파일 업로드에 대한 기능을 작성했고, 추후에 (변경, 삭제 등)추가 할 예정입니다.
+ 
+    $osFileUpload = new model_osFileUpload();
+    $osFileUpload->setEndpoint('https://kr.object.ncloudstorage.com'); // endpoint, 추후에 추가 될 것을 고려.
+    $osFileUpload->setUploader('testfile');                            // Object Storage 에 업로드 될 파일명 입력.
+    $result = $osFileUpload->multipartUpload();
+-------------------------------------------*/
+
 /*-----------------------------------------------------------------
 Include
 -----------------------------------------------------------------*/

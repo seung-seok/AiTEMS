@@ -6,7 +6,7 @@ use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 
 // bucket name : aitems-4232530859020
-$url = 'https://kr.object.ncloudstorage.com/';
+$url       = 'https://kr.object.ncloudstorage.com/';
 $accessKey = '3C92F2C564C1A2F36B1D';
 $secretKey = 'C4412634FFA35270969F040D4F7C1CAA7E5D08E4';
 

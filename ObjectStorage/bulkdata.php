@@ -26,7 +26,9 @@ $objectKey = 'q3k2uukkypo_pop_q6elqefuloe';
 // 3m92228957q_personalRecommend_c92h9lsw5z6 & q3k2uukkypo_pop_q6elqefuloe
 try 
 {
-    // Object Lists 를 반환
+    /*-----------------------------------------------------------------
+    Object Lists (FileNames) 를 반환
+    -----------------------------------------------------------------*/
     $objects = $s3Client->listObjects([
         'Bucket' => $bucket
     ]);
@@ -36,46 +38,57 @@ try
         if(strpos($object['Key'], $objectKey))
         {
             $str    = explode('/', $object['Key']);
-            $keys[] = $str[2];
+            $fileNames[] = $str[2];
         }
     }
 
-    // Object List 의 데이터를 읽어옴
+    /*-----------------------------------------------------------------
+    Object List 의 데이터를 읽어와 date 추가 및 파싱
+    -----------------------------------------------------------------*/
     $bucket = 'aitems-4232530859020/infer_result/' . $objectKey;
 
-    foreach($keys as $key)
+    foreach($fileNames as $fileName)
     {
         $result = $s3Client->getObject([
             'Bucket' => $bucket,
-            'Key'    => $key,
+            'Key'    => $fileName,
         ]);
 
         // GuzzleHttp\Psr7\Stream
         $data    = $result['Body'];
         $data    = $data->getContents();
-        
-        // json_decode 가능한 형태로 수정
-        $data  = str_replace("}\n", "},", $data);
-        $data  = substr($data, 0, -1);
-        $data  = '[' . $data . ']';
 
-        $data  = json_decode($data, true);
+        $now = date("Y-m-d H:i:s");
 
-        $i = 1;
-        foreach($data as $v)
+        $i = 0;
+        $data = explode("\n", $data);
+        foreach($data as $array)
         {
             $date    = array('date' => date('Y-m-d H:i:s'));
             $data    = array_merge($v, $date);
             $datas[] = $data;
             if($i == 3)
             {
-                break;
+                throw new Exception('엘라스틱 서치 PUT CURL 통신에 실패하였습니다. / ' .$error);
             }
+
+            curl_close($ch);
+
+            $res_decode = json_decode($res_raw, true);
+            var_dump($res_decode);
+            // exit;
+            
+            usleep(500);
             $i++;
+            if($i == 100)
+            {
+                exit;
+            }
         }
+        // print_r($eduData);
     }
 
-    // $datas = json_encode($datas);
+    
     $datas = json_encode($datas, JSON_PRETTY_PRINT);
     var_dump($datas);
     exit;

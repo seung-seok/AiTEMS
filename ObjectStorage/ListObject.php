@@ -37,6 +37,7 @@ try
         // echo $object['Key'] . PHP_EOL;
     }
     var_dump($dd);
+    exit;
 } 
 catch (S3Exception $e) 
 {

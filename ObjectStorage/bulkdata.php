@@ -22,7 +22,7 @@ $s3Client = new S3Client([
 $bucket = 'aitems-4232530859020';
 
 // Queue 읽어서 serviceId_type_versionId 의 형식으로 key값 지정
-$objectKey = '3m92228957q_personalRecommend_c92h9lsw5z6'; 
+$objectKey = 'q3k2uukkypo_pop_q6elqefuloe'; 
 // 3m92228957q_personalRecommend_c92h9lsw5z6 & q3k2uukkypo_pop_q6elqefuloe
 try 
 {
@@ -67,7 +67,7 @@ try
             $date    = array('date' => date('Y-m-d H:i:s'));
             $data    = array_merge($v, $date);
             $datas[] = $data;
-            if($i == 5)
+            if($i == 3)
             {
                 break;
             }

@@ -22,8 +22,8 @@ $s3Client = new S3Client([
 $bucket = 'aitems-4232530859020';
 
 // Queue 읽어서 serviceId_type_versionId 의 형식으로 key값 지정
-$objectKey = 'q3k2uukkypo_pop_q6elqefuloe'; 
-// 3m92228957q_personalRecommend_c92h9lsw5z6 & q3k2uukkypo_pop_q6elqefuloe
+$objectKey = '4neju9vtfk6_relatedItem_xbq3s621ky8'; 
+// 3m92228957q_personalRecommend_c92h9lsw5z6 & q3k2uukkypo_pop_q6elqefuloe & 4neju9vtfk6_relatedItem_xbq3s621ky8
 try 
 {
     /*-----------------------------------------------------------------
@@ -41,7 +41,7 @@ try
             $fileNames[] = $str[2];
         }
     }
-
+    
     /*-----------------------------------------------------------------
     Object List 의 데이터를 읽어와 date 추가 및 파싱
     -----------------------------------------------------------------*/
@@ -64,10 +64,39 @@ try
         $data = explode("\n", $data);
         foreach($data as $array)
         {
-            $date    = array('date' => date('Y-m-d H:i:s'));
-            $data    = array_merge($v, $date);
-            $datas[] = $data;
-            if($i == 3)
+            // $array = 하나의 json 파일 안의 데이터 1개
+            $array    = json_decode($array, true);
+            
+            // $eduData = 데이터 1개 + date
+            $date     = array('date' => $now);
+            $eduData  = array_merge($array, $date);
+            $eduData  = json_encode($eduData);
+
+            // [Set] ElasticSearch Header
+            $header   = array();
+            $header[] = 'Content-Type: application/json';
+            $header[] = 'Authorization: Basic Y3VyYXRpb246YWl0ZW1zMjAyMiEh';
+            
+            // [Set] index + eduData
+            $body = array("name"=>"curation_related", "value"=>"side_b", "date"=>$now, "data"=>$eduData);
+            $body = json_encode($body);
+
+            // curation_personal_side_a/user_id
+            $url = 'http://211.34.235.243:9200/curation_related_side_b/_doc/' . $array['ITEM_ID']; // USER_id, ITEM_ID
+            $ch  = curl_init(); 
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30); // 목적지 서버상태가 Overload 상태인지, 또는 크리티컬한 에러가 있는 상태인지에 따라 적용
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);        // 굉장히 큰파일, 또는 느린 연결 속도(네트워크속도에 좌우됨) 등에 따라 적용
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+
+            $res_raw = curl_exec($ch);
+            $error   = curl_errno($ch);
+
+            if($error)
             {
                 throw new Exception('엘라스틱 서치 PUT CURL 통신에 실패하였습니다. / ' .$error);
             }
